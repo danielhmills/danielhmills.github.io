@@ -24,8 +24,8 @@
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#">Contact</a></li>
                         <li class="nav-item" role="presentation"></li>
                         <li class="dropdown nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Projects</a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item disabled" role="presentation" href="../marvel.html" style="background-color: #ffe6e6;">Marvel</a><a class="dropdown-item" role="presentation" href="#">Sports</a><a class="dropdown-item" role="presentation"
-                                    href="#">Music</a></div>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item disabled" role="presentation" href="../marvel.html" style="background-color: #ffe6e6;">Marvel</a><a class="dropdown-item" role="presentation" href="#">Coming Soon</a><a class="dropdown-item" role="presentation"
+                                    href="#">Coming soon</a></div>
                         </li>
                     </ul>
                 </div>
@@ -38,8 +38,10 @@
                 <div class="col-md-12">
                     <h1 class="display-4 text-center" style="padding-top: 41px;padding-bottom: 25px;">Data Exploration of Avengers: Endgame</h1>
                     <h3 class="text-center"></h3>
-                    <p>Avengers: Endgame arrived on April 27th, and shows no signs of stopping its box-office gains anytime soon. This latest installement in the Marvel Cinematic Universe (MCU) serves as the final climax of the past 10 years of MCU fims;
-                        now known as the Infinity Saga. I've wanted to make this post since the films inital release, but chose to hold off given the spoilers that any projects or writeups about it will entail.<br><br><strong>(Intro To Be Continued)</strong></p>
+                    <p><a href="http://live.dbpedia.org/resource/Avengers:_Endgame">Avengers: Endgame</a> is the latest addition the the <a href="http://dbpedia.org/resource/Marvel_Cinematic_Universe">Marvel Cinematic Universe</a>, and the final installment
+                        of the Infinity Saga. The film focuses around the Original Avengers, some supporting characters, and thier quest to reverse Thanos's actions in during Infinity War; which wiped out half of the population.<br><br>Now that the "no
+                        spoilers" timeframe has passed, I can finally post this write-up showing how to represent characters, locations, infinity stones, and key parts of the film using <a href="https://www.w3.org/TR/turtle/">RDF-TURTLE</a> (a human readable
+                        RDF syntax) that has been loaded into a Virtuoso instance, and quering for event results related to each character using SPARQL.<br></p>
                 </div>
             </div>
         </div>
@@ -49,7 +51,7 @@
             <div class="row">
                 <div class="col">
                     <h3>Inserting Dataset:</h3>
-                    <p><strong>We begin by adding some data about the the film's events and characters:</strong></p>
+                    <p></p>
                     <div role="tablist" id="accordion-1">
                         <div class="card" style="background-color: rgb(255,255,255);">
                             <div class="card-header" role="tab" style="background-color: rgba(255,255,255,0.03);">
@@ -117,15 +119,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-header" role="tab">
+                                <h5 class="mb-0"><a data-toggle="collapse" aria-expanded="false" aria-controls="accordion-1 .item-3" href="div#accordion-1 .item-3">Download Dataset</a></h5>
+                            </div>
+                            <div class="collapse item-3" role="tabpanel" data-parent="#accordion-1">
+                                <div class="card-body">
+                                    <p class="card-text">This Dataset can also be downloaded <a href="https://github.com/danielhmills/danielhmills.github.io/blob/master/assets/data/insert.sql">here</a><br><br></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12" style="padding-bottom: 45px;padding-top: 45px;">
-                    <h3>Part 1: Who survived?</h3>
+                    <h3>Part 1: Which characters survived Infinity War?</h3>
                     <p class="visible">The movie starts with the dusting of Hawkeye's family, in addiiton to Iron Man and Nebula returning to Earth, with assistance from Captain Marvel. As Thanos's actions are explained to the group, we learn more about the Characters who
                         are currently dusted or unnacounted for.</p>
                     <p>In order to find the characters who survived the snap, we will be querying for relations in the inserted dataset, that signify post-snap survival status.</p>
                 </div>
-                <div class="col-12" style="padding-bottom: 45px;padding-top: 45px;">
+                <div class="col-12" style="padding-bottom: 45px;padding-top: 5px;">
                     <h4>Example Statement Expressed in RDF-TURTLE syntax:</h4>
                     <p>&lt;#ironman&gt; endgame:survivedDecimation "true"</p>
                 </div>
@@ -156,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1>Interactive Table</h1>
+                    <h1 style="padding-top: 32px;">Interactive Table</h1>
                     <p>Click on the cell hyperlinks, to see more information about each Character</p>
                     <div class="table-responsive" style="margin-top: 23px;">
                         <table class="table" id="myTable">
@@ -169,11 +181,11 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12" style="padding-top: 34px;">
                     <h3>Part 2: The First Battle</h3>
                     <p class="visible">After seeing a giant radiation signal coming from a distant planet, the remaining Avengers decide to confront the Mad Titan and do whatever it takes to reverse the snap.&nbsp;</p>
                 </div>
-                <div class="col-12 align-self-start">
+                <div class="col-12 align-self-start" style="padding-top: 25px;">
                     <h4>Event Details Expressed in RDF-TURTLE syntax</h4>
                     <p style="padding-top: 0;">&lt;#ThanosFight1&gt;<br><br>a endgame:Battle;<br><br>schema:name "Fight With Thanos (Post Snap)";<br><br>endgame:heroes &lt;#captainmarvel&gt;,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         &nbsp; &nbsp; &nbsp;&lt;#captainamerica&gt;,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;#thor&gt;,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -181,8 +193,9 @@
                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;#nebula&gt;,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;#blackwidow&gt;;<br><br>endgame:villains
                         &nbsp;&lt;#thanos&gt;.</p>
                 </div>
-                <div class="col-12"><img class="img-fluid" src="../assets/img/thanos-battle-1-3.png"></div>
-                <div class="col-md-12" style="padding-bottom: 45px;">
+                <div class="col-12" style="padding-top: 30px;">
+                    <h4>Diagram:</h4><img class="img-fluid" src="../assets/img/thanos-battle-1-3.png"></div>
+                <div class="col-md-12" style="padding-bottom: 45px;padding-top: 16px;">
                     <div role="tablist" id="accordion-1">
                         <div class="card">
                             <div class="card-header" role="tab">
@@ -208,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1>Interactive Table</h1>
+                    <h1 style="padding-top: 24px;">Interactive Table</h1>
                     <p>Click on the cell hyperlinks, to see more information about each Character</p>
                     <div class="table-responsive" style="margin-top: 23px;">
                         <table class="table" id="myTable2">
