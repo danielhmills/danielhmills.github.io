@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <body>
+            <h1>Basic SPARQL INSERT FORM</h1>
+
+            <form method="POST">
+                <div>First Name <input type="text" name="firstName" placeholder="First Name" id="firstName"></</div>
+                <div>Last Name <input type="text" name="lastName" placeholder="Last Name" id="lastName"></</div>
+                <div>Country <input type="text" name="country" placeholder="Country" id="country"></</div>
+                <div>Favourite Soccer Club <input type="text" name="club" placeholder="Favourite Premier League Club" id="club" size="35"></</div>
+
+                <h3>Authentication</h3>
+                <div><input type="text" name="host" placeholder='host (ex: "http://localhost:8890")' id="host" size="35"></div>
+                <div><input type="text" name="username" placeholder="Username" id="username"></</div>
+                <div><input type="password" name="password" placeholder="Password" id="password"></</div>
+                <div><button type="button" onclick="recordGen()">Generate</button> </div>
+
+            </form>
+
+            <p id="result"></p>
+
+            <script>
+                
+                //SPARQL INSERT SCRIPT
+
+                function recordGen() {
+                
+                username = document.getElementById("username").value;
+                password = document.getElementById("password").value ;
+                firstName = document.getElementById("firstName").value;
+                lastName =  document.getElementById("lastName").value;
+                country = document.getElementById("country").value;
+                club = document.getElementById("club").value;
+                console.log("user: " + username);
+
+                //Person Definition
+
+                    var person = {
+
+                        uri: "<#" + firstName + ">",
+                        first: '"' + firstName + '"^^xsd:string',
+                        last: '"' + lastName + '"^^xsd:string',
+                        country: '<#' + country + '>',
+                        club: '<#' + club + '>'
+                    };
+                
+                //SPARQL INSERT Query Generator
+
+                    insert = "INSERT INTO GRAPH <urn:records:test> \n{\n" 
+                                                                     + person.uri
+                                                                     + "\n a foaf:Person;"
+                                                                     + "foaf:firstName " + person.first + ";\n"
+                                                                     + "foaf:lastName " + person.last + ";\n"
+                                                                     + "schema:location " + person.country + ";\n"
+                                                                     + "skos:related " + person.club + ".\n"
+                                                                     + "}";
+
+                    let host = document.getElementById("host").value.trim().replace('/','');
+                    let url = host + '/sparql-auth/';
+                    
+                    console.log("Host: " + host);
+
+                    console.log(insert);
+
+
+                    const options = {
+                                        method: 'post',
+                                        headers: {
+                                                    'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                                                    'Credentials': 'Basic ' +  window.btoa(username + ":" + password)  
+                                                                 
+                                                },
+                                        body: 'query=' + encodeURIComponent(insert),
+                                    };
+                    
+                    fetch(url, options)
+                    .then(q => {    console.log(q);
+                                     document.getElementById("result").innerHTML = "Query Executed: <br>" + insert.replace('<','&lt;').replace('>','&gt')
+                                })
+                    .catch(err => {
+                                    console.error('Request failed', err)
+                                })   
+
+                }
+            </script>
+
+        </body>
+    </head>
+</html>
