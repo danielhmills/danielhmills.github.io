@@ -10,9 +10,9 @@
                 <div>Favourite Soccer Club <input type="text" name="club" placeholder="Favourite Premier League Club" id="club" size="35"></</div>
 
                 <h3>Authentication</h3>
-                <div><input type="text" name="host" placeholder='host (ex: "http://localhost:8890")' id="host" size="35"></div>
-                <div><input type="text" name="username" placeholder="Username" id="username"></</div>
-                <div><input type="password" name="password" placeholder="Password" id="password"></</div>
+                <div>Host<input type="text" name="host" placeholder='host (ex: "http://localhost:8890")' id="host" size="35" value="http://localhost:8890"></div>
+                <div>Username<input type="text" name="username" placeholder="Username" id="username"></</div>
+                <div>Password<input type="password" name="password" placeholder="Password" id="password"></</div>
                 <div><button type="button" onclick="recordGen()">Generate</button> </div>
 
             </form>
@@ -46,7 +46,7 @@
                 
                 //SPARQL INSERT Query Generator
 
-                    insert = "INSERT INTO GRAPH <urn:records:test> \n{\n" 
+                    insert = "PREFIX schema: <http://schema.org> \n INSERT INTO GRAPH <urn:records:test> \n{\n" 
                                                                      + person.uri
                                                                      + "\n a foaf:Person;"
                                                                      + "foaf:firstName " + person.first + ";\n"
@@ -55,7 +55,7 @@
                                                                      + "skos:related " + person.club + ".\n"
                                                                      + "}";
 
-                    let host = document.getElementById("host").value.trim().replace('/','');
+                    let host = document.getElementById("host").value.trim();
                     let url = host + '/sparql-auth/';
                     
                     console.log("Host: " + host);
