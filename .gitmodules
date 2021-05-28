@@ -1,0 +1,3 @@
+[submodule "arrows-ld"]
+	path = arrows-ld
+	url = https://github.com/danielhmills/arrows-ld
